@@ -78,36 +78,57 @@ class CreateHeader(graphene.Mutation):
         
         print(user)
 
-        currentHeader = Header.objects.filter(id=id_header).first()
-        print (currentHeader)
-
-        header = Header(
-            name         = name,
-            description  = description,
-            image_url    = image_url,
-            email        = email,
-            phone_number = phone_number,
-            location     = location,
-            github       = github,
-            posted_by    = user
-            )
-
+        currentHeader = Header.objects.first()
+        
         if currentHeader:
-            header.id = currentHeader.id
-
+            currentHeader.name = name
+            currentHeader.description = description
+            currentHeader.image_url = image_url
+            currentHeader.email = email
+            currentHeader.phone_number = phone_number
+            currentHeader.location = location
+            currentHeader.github = github
+            currentHeader.posted_by = user
+            
+            currentHeader.save()
+            
+            return CreateHeader(
+                id_header=currentHeader.id,
+                name=currentHeader.name,
+                description=currentHeader.description,
+                image_url=currentHeader.image_url,
+                email=currentHeader.email,
+                phone_number=currentHeader.phone_number,
+                location=currentHeader.location,
+                github=currentHeader.github,
+                posted_by=currentHeader.posted_by
+            )
+        
+        header = Header(
+            name=name,
+            description=description,
+            image_url=image_url,
+            email=email,
+            phone_number=phone_number,
+            location=location,
+            github=github,
+            posted_by=user
+        )
+        
         header.save()
 
         return CreateHeader(
-            id_header    = header.id,
-            name         = header.name,
-            description  = header.description,
-            image_url    = header.image_url,
-            email        = header.email,
-            phone_number = header.phone_number,
-            location     = header.location,
-            github       = header.github,
-            posted_by    = header.posted_by
+            id_header=header.id,
+            name=header.name,
+            description=header.description,
+            image_url=header.image_url,
+            email=header.email,
+            phone_number=header.phone_number,
+            location=header.location,
+            github=header.github,
+            posted_by=header.posted_by
         )
+
 
 class DeleteHeader(graphene.Mutation): 
     id_header = graphene.Int() 
