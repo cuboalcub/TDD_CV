@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'education',
     'workexperience',
     'skills',
+    'certificates',
     'languages',
     'interest',
     'corsheaders',
