@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'links',
+    'header',
+    'education',
+    'workexperience',
+    'skills',
+    'certificates',
+    'languages',
+    'interest',
     'corsheaders',
 ]
 
@@ -84,7 +91,7 @@ WSGI_APPLICATION = 'hacker_news.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default='postgresql://postgres:postgres@localhost:5432/mycv',
         conn_max_age=600
     )
 }
