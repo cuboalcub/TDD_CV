@@ -162,3 +162,5 @@ class DeleteHeader(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_header = CreateHeader.Field()
     delete_header = DeleteHeader.Field()
+    
+schema = graphene.Schema(query=Query, mutation=Mutation)

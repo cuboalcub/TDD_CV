@@ -137,3 +137,5 @@ class DeleteWorkExperience(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_work_experience = CreateWorkExperience.Field()
     delete_work_experience = DeleteWorkExperience.Field()
+    
+schema = graphene.Schema(query=Query, mutation=Mutation)
