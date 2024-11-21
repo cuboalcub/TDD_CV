@@ -125,3 +125,5 @@ class DeleteCertificate(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_certificate = CreateCertificate.Field()
     delete_certificate = DeleteCertificate.Field()
+    
+schema = graphene.Schema(query=Query, mutation=Mutation)

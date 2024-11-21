@@ -118,3 +118,5 @@ class DeleteEducation(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_education = CreateEducation.Field()
     delete_education = DeleteEducation.Field()
+    
+schema = graphene.Schema(query=Query, mutation=Mutation)
