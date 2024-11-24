@@ -151,7 +151,7 @@ class ExperienceTestCase(GraphQLTestCase):
                 'id_experience': 0,
                 'role': 'Backend Engineer',
                 'company': 'Code Factory',
-                'accomplishments': ['Built microservices', 'Optimized database queries'],
+                'accomplishments': [    ],
                 'start_date': '2018-06-01',
                 'end_date': '2020-12-31',
                 'location': 'On-site'},

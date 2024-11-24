@@ -60,7 +60,6 @@ class CreateHeader(graphene.Mutation):
 
     #2
     class Arguments:
-        id_header    = graphene.Int()
         name         = graphene.String()
         description  = graphene.String()
         image_url    = graphene.String()
@@ -70,17 +69,19 @@ class CreateHeader(graphene.Mutation):
         github       = graphene.String()
 
     #3
-    def mutate(self, info, id_header, name, description, image_url, email, phone_number, location, github):
-        user = info.context.user or None
+    def mutate(self, info, name, description, image_url, email, phone_number, location, github):
+        user = info.context.user
         
         if user.is_anonymous:
-            raise Exception('Not logged in !');
+            raise Exception('Not logged in!')
         
         print(user)
 
-        currentHeader = Header.objects.first()
+        # Verificar si ya existe un Header asociado al usuario
+        currentHeader = Header.objects.filter(posted_by=user).first()
         
         if currentHeader:
+            # Actualizar el Header existente
             currentHeader.name = name
             currentHeader.description = description
             currentHeader.image_url = image_url
@@ -88,8 +89,6 @@ class CreateHeader(graphene.Mutation):
             currentHeader.phone_number = phone_number
             currentHeader.location = location
             currentHeader.github = github
-            currentHeader.posted_by = user
-            
             currentHeader.save()
             
             return CreateHeader(
@@ -104,6 +103,7 @@ class CreateHeader(graphene.Mutation):
                 posted_by=currentHeader.posted_by
             )
         
+        # Crear un nuevo Header si no existe uno para el usuario
         header = Header(
             name=name,
             description=description,
@@ -114,7 +114,6 @@ class CreateHeader(graphene.Mutation):
             github=github,
             posted_by=user
         )
-        
         header.save()
 
         return CreateHeader(

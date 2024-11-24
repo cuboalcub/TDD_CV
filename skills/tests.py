@@ -80,7 +80,7 @@ class SkillTestCase(GraphQLTestCase):
     GRAPHQL_SCHEMA = schema
     
     def setUp(self):
-        self.skills1 = mixer.blend(Skill)
+        self.skills1 = mixer.blend(Skill)           
         self.skills2 = mixer.blend(Skill)
    
         response_user = self.query(
